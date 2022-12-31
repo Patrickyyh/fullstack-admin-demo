@@ -7,6 +7,11 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import clientRoutes from "./routes/client.js";
+import generalRoutes from "./routes/general.js";
+import managementRoutes from "./routes/management.js";
+import salesRoutes from "./routes/sales.js";
+
 // package and extenstion
 const app = express()
 
@@ -20,7 +25,10 @@ app.use(cors());
 dotenv.config();
 
 // routes
-
+app.use("/api/v1/client", clientRoutes);
+app.use("/api/v1/general", generalRoutes);
+app.use("/api/v1/management", managementRoutes);
+app.use("/api/v1/sales", salesRoutes);
 
 
 
