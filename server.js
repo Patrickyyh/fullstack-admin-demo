@@ -7,39 +7,46 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
-import clientRoutes from "./routes/client.js";
-import generalRoutes from "./routes/general.js";
-import managementRoutes from "./routes/management.js";
-import salesRoutes from "./routes/sales.js";
+
+import { generalRouter } from './controllers/general.js';
+
+// data imports
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
+
 
 // package and extenstion
 const app = express()
-
-app.use(express.json);
+dotenv.config();
+app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
-dotenv.config();
+
 
 // routes
-app.use("/api/v1/client", clientRoutes);
-app.use("/api/v1/general", generalRoutes);
-app.use("/api/v1/management", managementRoutes);
-app.use("/api/v1/sales", salesRoutes);
+app.use(generalRouter);
 
 
+
+
+const connectDB = (url) => {
+    return mongoose.connect(url);
+}
 
 
 // Set up database and start the server
 const PORT =  process.env.PORT || 9000;
-mongoose.connect(process.env.MONGO_URL,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+const start = async () => {
+    await connectDB(process.env.MONGO_URL);
+    console.log("here")
+}
+
+app.listen(PORT , ()=>{
+    console.log(`Server is listening on port ${PORT} ...`)
 })
-.then(()=>{
-    app.listen(PORT, ()=> console.log(`Server port: ${PORT}`));
-})
-.catch((error) => console.log(`${error} did not connect`));
+
+start();
