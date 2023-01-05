@@ -11,7 +11,8 @@ import morgan from 'morgan';
 import { generalRouter } from './controllers/general.js';
 
 // data imports
-import User from "./models/User.js";
+import User    from "./models/User.js";
+import Product from './models/Product.js';
 import { dataUser } from "./data/index.js";
 
 
@@ -29,8 +30,6 @@ app.use(cors());
 
 // routes
 app.use(generalRouter);
-
-
 
 
 const connectDB = (url) => {
