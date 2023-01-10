@@ -8,7 +8,7 @@ import {
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL}),
     reducerPath: "adminApi",
-    tagTypes: ["User", "Products","Customers"],
+    tagTypes: ["User", "Products","Customers","Transactions"],
     endpoints: (build) => ({
 
         getUser: build.query({
@@ -24,7 +24,17 @@ export const api = createApi({
         getCustomer: build.query({
             query: () => "api/v1/client/customers",
             providesTags: ["Customers"]
+        }),
+
+        getTransactions: build.query({
+            query: ({page, pageSize, sort, search}) => ({
+                url: "api/v1/client/transactions",
+                method: "GET",
+                params: { page, pageSize, sort, search },
+            }),
+            providesTags: ["Transactions"]
         })
+
 
     })
 })
@@ -32,7 +42,8 @@ export const api = createApi({
 export const {
     useGetUserQuery,
     useGetProductsQuery,
-    useGetCustomerQuery
+    useGetCustomerQuery,
+    useGetTransactionsQuery,
 } = api;
 
 

@@ -9,7 +9,7 @@ import morgan from 'morgan';
 
 
 import { generalRouter } from './controllers/general.js';
-import { productRouter } from './controllers/client.js';
+import { clientRouter } from './controllers/client.js';
 // data imports
 import User    from "./models/User.js";
 import Product from './models/Product.js';
@@ -37,7 +37,7 @@ app.use(cors());
 
 // routes
 app.use(generalRouter);
-app.use(productRouter);
+app.use(clientRouter);
 
 
 const connectDB = (url) => {
