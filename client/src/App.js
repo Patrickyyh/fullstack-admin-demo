@@ -10,6 +10,7 @@ import Dashboard from "scenes/dashboard";
 import Products  from "scenes/products";
 import Customers from "scenes/customers"
 import Transactions from "scenes/transactions";
+import Geography    from "scenes/geography";
 
 function App() {
 
@@ -25,11 +26,12 @@ function App() {
            <Routes>
               <Route element = {<Layout />}>
                   <Route path = "/" element ={<Navigate to = "/dashboard" replace />} />
-                  <Route path = "/dashboard" element ={<Dashboard />}/>
-                  <Route path = "/products"  element = {<Products />} />
-                  <Route path = "/customers" element = {<Customers />} />
+                  <Route path = "/dashboard"    element ={<Dashboard />}/>
+                  <Route path = "/products"     element = {<Products />} />
+                  <Route path = "/customers"    element = {<Customers />} />
                   <Route path = "/transactions" element = {<Transactions />} />
-              </Route>
+                  <Route path = "/geography"    element = {<Geography />} />
+               </Route>
            </Routes>
          </ThemeProvider>
        </BrowserRouter>
