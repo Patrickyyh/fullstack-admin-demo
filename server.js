@@ -10,16 +10,21 @@ import morgan from 'morgan';
 
 import { generalRouter } from './controllers/general.js';
 import { clientRouter } from './controllers/client.js';
+import { salesRouter } from './controllers/sales.js';
 // data imports
 import User    from "./models/User.js";
 import Product from './models/Product.js';
 import ProductStat from './models/ProductStat.js';
 import Transaction from './models/Transaction.js';
+import OverallStat from './models/OverallStat.js';
+
+
 import {
        dataUser ,
        dataProduct ,
        dataProductStat,
-       dataTransaction
+       dataTransaction,
+       dataOverallStat
     } from "./data/index.js";
 
 
@@ -38,6 +43,7 @@ app.use(cors());
 // routes
 app.use(generalRouter);
 app.use(clientRouter);
+app.use(salesRouter);
 
 
 const connectDB = (url) => {
@@ -59,6 +65,7 @@ app.listen(PORT , ()=>{
     // Product.insertMany(dataProduct);
     // ProductStat.insertMany(dataProductStat);
     //Transaction.insertMany(dataTransaction);
+    //OverallStat.insertMany(dataOverallStat);
 
 })
 
